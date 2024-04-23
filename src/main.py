@@ -17,19 +17,22 @@ bot_accounts = [
 # URL del tweet al que quieres que los bots le den "me gusta"
 tweet_url = input("Introduce la URL del tweet: ")
 
-# Configuración de Selenium
-driver = webdriver.Chrome()
-time.sleep(2)
-
 # Iterar sobre cada cuenta de bot
 for bot in bot_accounts:
+    # Configuración de Selenium
+    driver = webdriver.Chrome()
+    time.sleep(2)
+
+    # Maximizar la ventana del navegador
+    driver.maximize_window()
+    
     # Iniciar sesión en Twitter con la cuenta del bot actual
     username = bot["username"]
     password = bot["password"]
     
     # Ir al Login
     driver.get("https://twitter.com/login")
-    time.sleep(4)
+    time.sleep(5)
     
     # Buscar el input y clickar en él
     username_input = driver.find_element(By.XPATH, "//div[contains(@class, 'css-175oi2r')]/div/input[@name='text']")
@@ -40,20 +43,21 @@ for bot in bot_accounts:
     username_div = driver.find_element(By.XPATH, "//div[contains(@class, 'css-175oi2r')]")
     username_input = username_div.find_element(By.NAME, "text")
     username_input.send_keys(username)
+    time.sleep(2)
     username_input.send_keys(Keys.RETURN)
     time.sleep(2)  # Esperar a que la página se cargue completamente
     
     # Ingresar la contraseña y presionar Enter
     password_div = driver.find_element(By.XPATH, "//div[contains(@class, 'css-175oi2r')]")
     password_input = password_div.find_element(By.NAME, "password")
-    password_input.send_keys(username)
+    password_input.send_keys(password)
     time.sleep(1)
     password_input.send_keys(Keys.RETURN)
-    time.sleep(2)  # Esperar a que la página se cargue completamente
+    time.sleep(6)  # Esperar a que la página se cargue completamente
 
     # Visitar el tweet objetivo
     driver.get(tweet_url)
-    time.sleep(3)  # Esperar a que la página se cargue completamente
+    time.sleep(4)  # Esperar a que la página se cargue completamente
     
     # Dar "me gusta" al tweet
     try:
@@ -65,16 +69,8 @@ for bot in bot_accounts:
     except Exception as e:
         print("Error:", e)
     
-    # Cerrar sesión después de dar "me gusta" al tweet
-    driver.get("https://twitter.com/logout")
-    time.sleep(3)  # Esperar a que la página se cargue completamente
-    try:
-        confirmation_button = driver.find_element(By.XPATH, '//div[@data-testid="confirmationSheetConfirm"]')
-        if confirmation_button:
-            confirmation_button.click()
-        time.sleep(3)  # Esperar a que se cierre la sesión completamente
-    except Exception as e:
-        print("No confirmation sheet:", e)
+    # Cerrar el navegador después de que todos los bots hayan terminado
+    driver.quit()
+    
 
-# Cerrar el navegador después de que todos los bots hayan terminado
-driver.quit()
+
