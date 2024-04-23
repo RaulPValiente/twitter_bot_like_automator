@@ -1,0 +1,8 @@
+# Versión de Python
+python==3.12.2
+
+# Versión de Selenium
+selenium==4.19.0
+
+# Versión del WebDriver
+chromedriver==114.0.5735.90
