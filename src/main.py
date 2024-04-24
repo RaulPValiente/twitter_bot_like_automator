@@ -6,11 +6,11 @@ from selenium.webdriver.common.by import By
 # Lista de usuarios y contraseñas de los bots
 bot_accounts = [
     {"username": "bot1_username", "password": "password"},
-    {"username": "bot2_username", "password": "password"},
-    {"username": "bot4_username", "password": "password"},
-    {"username": "bot3_username", "password": "password"},
-    {"username": "bot6_username", "password": "password"},
-    {"username": "bot5_username", "password": "password"},
+    # {"username": "bot2_username", "password": "password"},
+    # {"username": "bot4_username", "password": "password"},
+    # {"username": "bot3_username", "password": "password"},
+    # {"username": "bot6_username", "password": "password"},
+    # {"username": "bot5_username", "password": "password"},
     # Agrega los bots que quieras
 ]
 
@@ -67,8 +67,26 @@ for bot in bot_accounts:
             driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });", like_button)
             time.sleep(2)
             like_button.click()
-            print(f'Liked a tweet from {username}')
-            time.sleep(1)
+            print(f'Liked: {username}')
+            time.sleep(2)
+    except Exception as e:
+        print("Error:", e)
+        
+    # Dar "RT" al tweet
+    try:
+        rt_button =  driver.find_element(By.XPATH, '//div[@data-testid="retweet"]')
+        if rt_button:
+            rt_button.click()
+            time.sleep(2)
+    except Exception as e:
+        print("Error:", e)
+    
+    # Confirmar "RT" al tweet
+    try:
+        rt_confirm = driver.find_element(By.XPATH, '//div[@data-testid="retweetConfirm"]')
+        if rt_confirm:
+            rt_confirm.click()
+            time.sleep(2)
     except Exception as e:
         print("Error:", e)
     
