@@ -21,7 +21,7 @@ bot_accounts = [
 root = tk.Tk()
 root.geometry("1200x600")
 root.withdraw()
-tweet_url = simpledialog.askstring("NOVA", "Introduce la URL del tweet:")
+tweet_url = simpledialog.askstring("NOVA Automatizer", "Introduce la URL del tweet \t\t\t\t\t\t")
 
 # Verificar si no se ingresó ninguna URL
 if tweet_url is None:
