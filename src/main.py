@@ -19,7 +19,6 @@ bot_accounts = [
 
 # Crear una ventana emergente para ingresar la URL del tweet
 root = tk.Tk()
-root.geometry("1200x600")
 root.withdraw()
 tweet_url = simpledialog.askstring("NOVA Automatizer", "Introduce la URL del tweet \t\t\t\t\t\t")
 
@@ -43,12 +42,12 @@ for bot in bot_accounts:
     
     # Ir al Login
     driver.get("https://twitter.com/login")
-    time.sleep(5)
+    time.sleep(4)
     
     # Buscar el input y clickar en él
     username_input = driver.find_element(By.XPATH, "//div[contains(@class, 'css-175oi2r')]/div/input[@name='text']")
     username_input.click()
-    time.sleep(2)
+    time.sleep(1)
     
     # Ingresar el usuario y presionar Enter
     username_div = driver.find_element(By.XPATH, "//div[contains(@class, 'css-175oi2r')]")
@@ -64,11 +63,11 @@ for bot in bot_accounts:
     password_input.send_keys(password)
     time.sleep(1)
     password_input.send_keys(Keys.RETURN)
-    time.sleep(6)  # Esperar a que la página se cargue completamente
+    time.sleep(4)  # Esperar a que la página se cargue completamente
 
     # Visitar el tweet objetivo
     driver.get(tweet_url)
-    time.sleep(4)  # Esperar a que la página se cargue completamente
+    time.sleep(3)  # Esperar a que la página se cargue completamente
     
     # Dar "me gusta" al tweet
     try:
@@ -79,7 +78,7 @@ for bot in bot_accounts:
             time.sleep(2)
             like_button.click()
             print(f'Liked: {username}')
-            time.sleep(2)
+            time.sleep(1)
     except Exception as e:
         print("Error:", e)
         
@@ -88,7 +87,7 @@ for bot in bot_accounts:
         rt_button =  driver.find_element(By.XPATH, '//div[@data-testid="retweet"]')
         if rt_button:
             rt_button.click()
-            time.sleep(2)
+            time.sleep(1)
     except Exception as e:
         print("Error:", e)
     
@@ -98,12 +97,9 @@ for bot in bot_accounts:
         if rt_confirm:
             rt_confirm.click()
             print(f'Retweeted: {username}')
-            time.sleep(2)
+            time.sleep(1)
     except Exception as e:
         print("Error:", e)
     
     # Cerrar el navegador después de que todos los bots hayan terminado
     driver.quit()
-    
-
-
