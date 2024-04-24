@@ -1,6 +1,6 @@
-# Twitter Retweet Bot
+# Twitter Retweet+Like Bot
 
-This script automates the process of liking a specific tweet using Twitter bot accounts.
+This script automates the process of liking and retweeting a specific tweet using Twitter bot accounts.
 
 ## Requirements
 
@@ -17,8 +17,8 @@ This script automates the process of liking a specific tweet using Twitter bot a
 ## Usage
 
 1. Run the program in your preferred Python environment.
-2. The program will search Twitter for tweets containing the specified keyword.
-3. It will then retweet a maximum number of tweets (specified by `maxNumberOfTweets`) that match the search query.
+2. The program will like and retweet a specific tweet.
+3. It will do it one time per bot.
 
 ## Installation
 
