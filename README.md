@@ -8,12 +8,6 @@ This script automates the process of liking and retweeting a specific tweet usin
 - Selenium
 - WebDriver for your chosen browser (in this case, Chrome WebDriver is used)
 
-## Installation
-
-1. Clone or download this repository.
-2. Install the Tweepy library using pip:
-3. Replace the placeholder credentials in the code with your own Twitter API credentials.
-
 ## Usage
 
 1. Run the program in your preferred Python environment.
