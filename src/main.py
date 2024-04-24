@@ -63,9 +63,12 @@ for bot in bot_accounts:
     try:
         like_button = driver.find_element(By.XPATH, '//div[@data-testid="like"]')
         if like_button:
+            # Desplazarse hasta el botón de "Me gusta" para asegurarse de que esté visible en la pantalla
+            driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });", like_button)
+            time.sleep(2)
             like_button.click()
             print(f'Liked a tweet from {username}')
-            time.sleep(1)  # Esperar un breve período antes de dar "me gusta" al siguiente tweet
+            time.sleep(1)
     except Exception as e:
         print("Error:", e)
     
