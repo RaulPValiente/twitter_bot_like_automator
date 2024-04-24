@@ -1,3 +1,6 @@
+import sys
+import tkinter as tk
+from tkinter import simpledialog, messagebox
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -5,17 +8,25 @@ from selenium.webdriver.common.by import By
 
 # Lista de usuarios y contraseñas de los bots
 bot_accounts = [
-    {"username": "bot1_username", "password": "password"},
-    # {"username": "bot2_username", "password": "password"},
-    # {"username": "bot4_username", "password": "password"},
-    # {"username": "bot3_username", "password": "password"},
-    # {"username": "bot6_username", "password": "password"},
-    # {"username": "bot5_username", "password": "password"},
+    {"username": "bot1", "password": "password"},
+    {"username": "bot4", "password": "password"},
+    {"username": "bot3", "password": "password"},
+    {"username": "bot2", "password": "password"},
+    {"username": "bot6", "password": "password"},
+    {"username": "bot5", "password": "password"},
     # Agrega los bots que quieras
 ]
 
-# URL del tweet al que quieres que los bots le den "me gusta"
-tweet_url = input("Introduce la URL del tweet: ")
+# Crear una ventana emergente para ingresar la URL del tweet
+root = tk.Tk()
+root.geometry("1200x600")
+root.withdraw()
+tweet_url = simpledialog.askstring("NOVA", "Introduce la URL del tweet:")
+
+# Verificar si no se ingresó ninguna URL
+if tweet_url is None:
+    messagebox.showerror("Error", "No has introducido ninguna URL. El programa se cerrará.")
+    sys.exit(1)
 
 # Iterar sobre cada cuenta de bot
 for bot in bot_accounts:
@@ -86,6 +97,7 @@ for bot in bot_accounts:
         rt_confirm = driver.find_element(By.XPATH, '//div[@data-testid="retweetConfirm"]')
         if rt_confirm:
             rt_confirm.click()
+            print(f'Retweeted: {username}')
             time.sleep(2)
     except Exception as e:
         print("Error:", e)
