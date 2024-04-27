@@ -10,9 +10,10 @@ This script automates the process of liking and retweeting a specific tweet usin
 
 ## Usage
 
-1. Run the program in your preferred Python environment.
-2. The program will like and retweet a specific tweet.
-3. It will do it one time per bot.
+1. Make sure Google Chrome is completely closed, including from the bottom right menu.
+2. Run the program in your preferred Python environment.
+3. The program will like and retweet a specific tweet.
+4. It will do it one time per bot.
 
 ## Installation
 
@@ -29,7 +30,7 @@ pip install selenium
 ## Configuration
 
 - bot_accounts: List of dictionaries containing the credentials of the bot accounts. You can add as many bots as you wish in this format.
-- tweet_url: URL of the tweet you want the bots to like.
+- tweet_url: URL of the tweet you want the bots to like and RT.
 
 ## Note
 
