@@ -5,15 +5,22 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+
+# Configuración del webdriver
+options = Options()
+options.add_argument("--user-data-dir=C:/Users/tu_user/AppData/Local/Google/Chrome/User Data") # 'chrome://version' copiar y pegar hasta 'User Data'
+options.add_argument("--profile-directory=Default") # 'chrome://version' copiar el perfil que sigue a 'User Data'
+options.add_argument("--start-maximized")
 
 # Lista de usuarios y contraseñas de los bots
 bot_accounts = [
-    {"username": "bot1", "password": "password"},
-    {"username": "bot4", "password": "password"},
-    {"username": "bot3", "password": "password"},
-    {"username": "bot2", "password": "password"},
-    {"username": "bot6", "password": "password"},
-    {"username": "bot5", "password": "password"},
+    {"username": "bot1", "password": "ps"},
+    {"username": "bot3", "password": "ps"},
+    {"username": "bot4", "password": "ps"},
+    {"username": "bot2", "password": "ps"},
+    {"username": "bot5", "password": "ps"},
+    {"username": "bot6", "password": "ps"},
     # Agrega los bots que quieras
 ]
 
@@ -29,12 +36,11 @@ if tweet_url is None:
 
 # Iterar sobre cada cuenta de bot
 for bot in bot_accounts:
-    # Configuración de Selenium
-    driver = webdriver.Chrome()
+    
+    # Iniciar Chrome
+    # Es necesario tener Chrome cerrado del todo (incluido del menú de la parte inferior derecha) y no estar logueado de por sí en ninguna cuenta del perfil
+    driver = webdriver.Chrome(options=options)
     time.sleep(2)
-
-    # Maximizar la ventana del navegador
-    driver.maximize_window()
     
     # Iniciar sesión en Twitter con la cuenta del bot actual
     username = bot["username"]
@@ -101,5 +107,13 @@ for bot in bot_accounts:
     except Exception as e:
         print("Error:", e)
     
-    # Cerrar el navegador después de que todos los bots hayan terminado
+    # Cerrar sesión en Twitter
+    driver.get("https://twitter.com/logout")
+    logout_confirm = driver.find_element(By.XPATH, '//div[@data-testid="confirmationSheetConfirm"]')
+    time.sleep(2)
+    logout_confirm.click()
+    time.sleep(4)  # Esperar a que cierre sesión
+    
+    # Cerrar el navegador
     driver.quit()
+    print(f'Bot finalizado: {username}')
